@@ -22,6 +22,12 @@
     background-image: -webkit-linear-gradient(top, #fb1304 0%, #e35843 50%, #edad99 100%);
 }
 
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .because-i-can {
     font-weight: bold;
     color: #fb1304;
