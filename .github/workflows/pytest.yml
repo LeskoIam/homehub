@@ -1,4 +1,4 @@
-name: flake8 check
+name: pytest test run
 
 on:
   push:
@@ -7,14 +7,12 @@ on:
     paths:
       - '**.py'
   pull_request:
-    branches-ignore:
-      - lesko/flake8-dev
     paths:
       - '**.py'
   workflow_dispatch:
 
 jobs:
-  flake8:
+  pytest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -30,18 +28,12 @@ jobs:
       - name: Upgrade pip
         run: python3 -m pip install --upgrade pip
 
-      - name: Install flake8
-        run: python3 -m pip install flake8
+      - name: Install pytest
+        run: python3 -m pip install pytest
 
-      - uses: liskin/gh-problem-matcher-wrap@v1
-        with:
-          action: add
-          linters: flake8
-      - name: flake8
+      - name: Install requirements
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Test with pytest
         run: |
-          git diff HEAD~1 | flake8 --diff --format=default
-      - uses: liskin/gh-problem-matcher-wrap@v1
-        if: always()
-        with:
-          action: remove
-          linters: flake8
+            pytest --log-cli-level=10

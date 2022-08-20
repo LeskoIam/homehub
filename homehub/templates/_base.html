@@ -2,10 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>homehub</title>
+    {% block refresh %}{% endblock %}
+    <title>householdHub</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 <body>
-{% block floorplan %}
-{% endblock %}
+{{ request.url_rule.endpoint }}
+<div class="container">
+
+{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <ul>
+                {% for category, message in messages %}
+                    {% if category == "error" %}
+                        <li style="color: red;"> {{ message }} </li>
+                    {% elif category == "warning" %}
+                        <li style="color: blue;"> {{ message }} </li>
+                    {% else %}
+                        <li> {{ message }} </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+{% endwith %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+
+                <li {% if request.url_rule.endpoint in ["index"] %}class="nav-item active" {% else %} class="nav-item"{% endif %}>
+                    <a class="nav-link bold" href="{{ url_for("index") }}">Domov</a>
+                </li>
+
+                <li {% if request.url_rule.endpoint in ["why"] %} class="nav-item active" {% else %}class="nav-item"{% endif %}>
+                    <a class="nav-link bold" href="{{ url_for("why") }}">Why</a>
+                    {% block finances_nav%}{% endblock %}
+                </li>
+
+{#                <li {% if request.url_rule.endpoint in ["hue_handler"] %} class="nav-item active" {% else %}class="nav-item"{% endif %}>#}
+{#                    <a class="nav-link bold" href="{{ url_for("hue_handler") }}">Hue</a>#}
+{#                    {% block hue_nav%}{% endblock %}#}
+{#                </li>#}
+{##}
+{#                <li {% if request.url_rule.endpoint in ["misc_handler", "black_page"] %} class="nav-item active" {% else %}class="nav-item"{% endif %}>#}
+{#                    <a class="nav-link bold" href="{{ url_for("misc_handler") }}">Misc</a>#}
+{#                    {% block misc_nav%}{% endblock %}#}
+{#                </li>#}
+
+                <li class="nav-item">
+                    {% if current_user.is_authenticated %}
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout - {{ current_user.username }}</a>
+                    {% else %}
+                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    {% endif %}
+                </li>
+                    {% if not current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('register_user') }}">Register</a>
+                </li>
+            {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</div>
 </body>
 </html>
