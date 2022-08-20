@@ -1,8 +1,14 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+# from homehub.common.common import format_datetime
+from config import Config
+
 
 app = Flask(__name__)
+app.config.from_object(Config)
+db = SQLAlchemy(app)
 
-import homehub.views
+# app.jinja_env.filters['format_datetime'] = format_datetime
 
-if __name__ == '__main__':
-    app.run()
+from homehub import views
