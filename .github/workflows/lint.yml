@@ -7,6 +7,9 @@ on:
     paths:
       - '**.py'
   pull_request:
+    types:
+      - opened
+      - reopened
     paths:
       - '**.py'
   workflow_dispatch:
