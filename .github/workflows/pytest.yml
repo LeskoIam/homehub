@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  flake8:
+  pytest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -30,7 +30,7 @@ jobs:
       - name: Upgrade pip
         run: python3 -m pip install --upgrade pip
 
-      - name: Install flake8
+      - name: Install pytest
         run: python3 -m pip install pytest
 
       - name: Test with pytest
