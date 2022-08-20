@@ -2,34 +2,32 @@
 # When it's good, it's very good.
 # When it's bad, it's better than nothing.
 # When it lies to you, it may be a while before you realize something's wrong.
-from homehub import db
+from homehub import db, login
+from werkzeug.security import (generate_password_hash,
+                               check_password_hash)
+from flask_login import UserMixin
 
 
-class User(db.Model):
-    """An admin user capable of viewing reports.
+class User(UserMixin, db.Model):
+    __tablename__ = "user"
 
-    :param str email: email address of user
-    :param str password: encrypted password for the user
+    id = db.Column(db.Integer, primary_key=True)
 
-    """
-    __tablename__ = 'user'
+    username = db.Column(db.String(64), index=True, unique=True)
+    email = db.Column(db.String(128), index=True, unique=False)
+    password_hash = db.Column(db.String(512))
+    active = db.Column(db.Boolean, nullable=False, default=True)
 
-    email = db.Column(db.String, primary_key=True)
-    password = db.Column(db.String)
-    authenticated = db.Column(db.Boolean, default=False)
+    def __repr__(self):
+        return "<User {}>".format(self.username)
 
-    def is_active(self):
-        """True, as all users are active."""
-        return True
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
-    def get_id(self):
-        """Return the email address to satisfy Flask-Login's requirements."""
-        return self.email
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
-    def is_authenticated(self):
-        """Return True if the user is authenticated."""
-        return self.authenticated
 
-    def is_anonymous(self):
-        """False, as anonymous users aren't supported."""
-        return False
+@login.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
