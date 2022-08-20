@@ -17,8 +17,8 @@ jobs:
           python-version: 3.10.6
           architecture: x64
 
-#      - name: Checkout PyTorch
-#        uses: actions/checkout@master
+      - name: Checkout project
+        uses: actions/checkout@master
 
       - name: Upgrade pip
         run: python3 -m pip install --upgrade pip
