@@ -1,0 +1,38 @@
+name: flake8 check
+
+on:
+  push:
+    branches:
+      - '*/test*'
+    paths-ignore:
+      - 'tests/**'
+  pull_request:
+    branches-ignore:
+      - lesko/flake8-dev
+    paths:
+      - '**.py'
+  workflow_dispatch:
+
+jobs:
+  flake8:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 21
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Get python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      - name: Upgrade pip
+        run: python3 -m pip install --upgrade pip
+
+      - name: Install flake8
+        run: python3 -m pip install pytest
+
+      - name: Test with pytest
+        run: |
+            pytest
