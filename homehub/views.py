@@ -5,5 +5,5 @@ from homehub import app
 
 @app.route('/')
 def index():
-    print("let me sea wahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahaha")
+    "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
     return render_template("floorplan.html")
