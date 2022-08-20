@@ -17,6 +17,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(128), index=True, unique=False)
     password_hash = db.Column(db.String(512))
     active = db.Column(db.Boolean, nullable=False, default=True)
+    role = db.Column(db.String(64), nullable=False, default="user")
 
     def __repr__(self):
         return "<User {}>".format(self.username)
