@@ -7,6 +7,8 @@ on:
     paths:
       - '**.py'
   pull_request:
+    branches-ignore:
+      - lesko/flake8-dev
     paths:
       - '**.py'
   workflow_dispatch:
