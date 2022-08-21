@@ -15,7 +15,7 @@ services:
     volumes: ['./homehub_web:/homehub_web']
   worker:
     build:
-      context: ./celery-workers
+      context: celery_workers
       dockerfile: Dockerfile.dev
     command: celery -A tasks worker -l info -E
     environment:
@@ -26,7 +26,7 @@ services:
     volumes: ['./celery-workers:/queue']
   monitor:
     build:
-      context: ./celery-workers
+      context: celery_workers
       dockerfile: Dockerfile.dev
     ports:
      - "5555:5555"
