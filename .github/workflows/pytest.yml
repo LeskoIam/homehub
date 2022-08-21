@@ -31,8 +31,11 @@ jobs:
       - name: Install pytest
         run: python3 -m pip install pytest
 
-      - name: Install requirements
-        run: python3 -m pip install -r requirements.txt
+      - name: Install celery_workers requirements
+        run: python3 -m pip install -r celery_workers/requirements.txt
+
+      - name: Install homehub_web requirements
+        run: python3 -m pip install -r homehub_web/requirements.txt
 
       - name: Test with pytest
         run: |

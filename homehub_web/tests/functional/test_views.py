@@ -5,8 +5,8 @@
 import pytest
 import logging
 
-from homehub import app
-from config import TestConfig
+from homehub_web.app import app
+from homehub_web.config import TestConfig
 
 app.config.from_object(TestConfig)
 

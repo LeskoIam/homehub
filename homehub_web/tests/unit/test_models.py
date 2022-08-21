@@ -4,9 +4,9 @@
 # When it lies to you, it may be a while before you realize something's wrong.
 import logging
 
-from homehub.models import User
-from homehub import app
-from config import TestConfig
+from homehub_web.models import User
+from homehub_web.app import app
+from homehub_web.config import TestConfig
 
 app.config.from_object(TestConfig)
 

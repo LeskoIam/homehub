@@ -1,11 +1,15 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, Response, jsonify
 from flask_login import (current_user,
                          login_user,
                          logout_user,
                          login_required)
-from homehub import app, db
-from homehub.forms import LoginForm, RegistrationForm
-from homehub.models import User
+
+import celery.states as states
+from homehub_web.worker import celery
+
+from homehub_web.app import app, db
+from homehub_web.forms import LoginForm, RegistrationForm
+from homehub_web.models import User
 
 
 @app.route('/')
@@ -17,6 +21,40 @@ def index():
 @login_required
 def why():
     return render_template("why.html")
+
+
+@app.route('/add/<int:param1>/<int:param2>')
+def add(param1: int, param2: int) -> str:
+    task = celery.send_task('tasks.add', args=[param1, param2], kwargs={})
+    response = f"<a href='{url_for('check_task', task_id=task.id, external=True)}'>check status of {task.id} </a>"
+    return response
+
+
+@app.route('/hue')
+def hue() -> str:
+    task = celery.send_task('tasks.hue', args=[], kwargs={})
+    response = f"<a href='{url_for('check_task', task_id=task.id, external=True)}'>check status of {task.id} </a>"
+    return response
+
+
+@app.route('/check/<string:task_id>')
+def check_task(task_id: str) -> str:
+    res = celery.AsyncResult(task_id)
+    if res.state == states.PENDING:
+        return res.state
+    else:
+        return str(res.result)
+
+
+@app.route('/health_check')
+def health_check() -> Response:
+    return jsonify("OK")
+
+
+@app.route("/user_page")
+@login_required
+def user_page():
+    return render_template('user_page.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
