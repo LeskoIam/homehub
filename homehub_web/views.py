@@ -5,11 +5,11 @@ from flask_login import (current_user,
                          login_required)
 
 import celery.states as states
-from worker import celery
+from homehub_web.worker import celery
 
-from app import app, db
-from forms import LoginForm, RegistrationForm
-from models import User
+from homehub_web.app import app, db
+from homehub_web.forms import LoginForm, RegistrationForm
+from homehub_web.models import User
 
 
 @app.route('/')

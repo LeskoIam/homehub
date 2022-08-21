@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
 # from homehub.common.common import format_datetime
-from config import Config
+from homehub_web.config import Config
 
 
 app = Flask(__name__)
@@ -15,4 +15,4 @@ db = SQLAlchemy(app)
 
 # app.jinja_env.filters['format_datetime'] = format_datetime
 
-import views
+from homehub_web import views

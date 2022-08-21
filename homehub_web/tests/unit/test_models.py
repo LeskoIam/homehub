@@ -5,7 +5,7 @@
 import logging
 
 from homehub_web.models import User
-from homehub_web import app
+from homehub_web.app import app
 from homehub_web.config import TestConfig
 
 app.config.from_object(TestConfig)

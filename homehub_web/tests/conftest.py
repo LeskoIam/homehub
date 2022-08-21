@@ -3,7 +3,7 @@
 # When it's bad, it's better than nothing.
 # When it lies to you, it may be a while before you realize something's wrong.
 import pytest
-from homehub_web import db
+from homehub_web.app import db
 from homehub_web.models import User
 
 import logging

@@ -9,7 +9,7 @@ from wtforms.validators import (ValidationError,
                                 Email,
                                 EqualTo)
 
-from models import User
+from homehub_web.models import User
 
 
 __author__ = 'mpolensek'

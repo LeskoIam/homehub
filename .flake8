@@ -7,6 +7,6 @@ show_source = True
 
 ignore = W503
 per-file-ignores =
-        homehub/__init__.py:F401,E402
+        homehub_web/app.py:F401,E402
         homehub.py:F401
 
