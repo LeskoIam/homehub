@@ -26,7 +26,7 @@ jobs:
           python-version: '3.10'
 
       - name: Upgrade pip
-        run: python3 -m pip install --upgrade pip
+        run:
 
       - name: Install flake8
         run: python3 -m pip install flake8

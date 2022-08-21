@@ -2,7 +2,7 @@
 # When it's good, it's very good.
 # When it's bad, it's better than nothing.
 # When it lies to you, it may be a while before you realize something's wrong.
-from homehub import db, login
+from app import db, login
 from werkzeug.security import (generate_password_hash,
                                check_password_hash)
 from flask_login import UserMixin

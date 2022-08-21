@@ -3,8 +3,8 @@
 # When it's bad, it's better than nothing.
 # When it lies to you, it may be a while before you realize something's wrong.
 
-from homehub import db
-from homehub.models import User
+from homehub_web import db
+from homehub_web.models import User
 db.create_all()
 
 user = User(username="admin", email="admin@admin.com", role="admin")

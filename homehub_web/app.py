@@ -15,4 +15,4 @@ db = SQLAlchemy(app)
 
 # app.jinja_env.filters['format_datetime'] = format_datetime
 
-from homehub import views
+import views

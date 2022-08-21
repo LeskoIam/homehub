@@ -3,9 +3,9 @@ from flask_login import (current_user,
                          login_user,
                          logout_user,
                          login_required)
-from homehub import app, db
-from homehub.forms import LoginForm, RegistrationForm
-from homehub.models import User
+from app import app, db
+from forms import LoginForm, RegistrationForm
+from models import User
 
 
 @app.route('/')
