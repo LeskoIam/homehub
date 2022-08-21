@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+
+{% block content %}
+    <div class="h2">USER</div>
+    <div class="alert alert-primary" role="alert"><b>username:</b> {{ current_user.username }}</div>
+    <div class="alert alert-primary" role="alert"><b>email:</b> {{ current_user.email }}</div>
+    <div class="alert alert-primary" role="alert"><b>password_hash:</b> {{ current_user.password_hash }}</div>
+    <div class="alert alert-primary" role="alert"><b>active:</b> {{ current_user.active }}</div>
+    <div class="alert alert-primary" role="alert"><b>role:</b> {{ current_user.role }}</div>
+
+{% endblock %}
