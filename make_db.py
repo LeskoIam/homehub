@@ -4,4 +4,12 @@
 # When it lies to you, it may be a while before you realize something's wrong.
 
 from homehub import db
+from homehub.models import User
 db.create_all()
+
+user = User(username="admin", email="admin@admin.com", role="admin")
+user.set_password("admin")
+db.session.add(user)
+
+# Commit the changes for the users
+db.session.commit()

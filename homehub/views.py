@@ -19,6 +19,12 @@ def why():
     return render_template("why.html")
 
 
+@app.route("/user_page")
+@login_required
+def user_page():
+    return render_template('user_page.html')
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register_user():
     if current_user.is_authenticated:

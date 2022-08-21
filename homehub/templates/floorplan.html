@@ -35,5 +35,23 @@
             ctx.fillRect(start_x+i, start_y+100, 2, 20);
         }
 
+        const getCursorPosition = (canvas, event) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            if (event.altKey) {
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            }
+            console.log(x, y);
+        };
+        {#canvas.addEventListener('mousedown', (e) => {#}
+        {#    getCursorPosition(canvas, e);#}
+        {#})#}
+
+        canvas.addEventListener('mousemove', (e) => {
+            getCursorPosition(canvas, e);
+        })
+
     </script>
 {% endblock %}
