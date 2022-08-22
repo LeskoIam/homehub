@@ -1,0 +1,16 @@
+https://github.com/LeskoIam/homehub
+
+https://testdriven.io/blog/dockerizing-flask-with-postgres-gunicorn-and-nginx/
+https://testdriven.io/blog/flask-and-celery/
+https://testdriven.io/blog/flask-pytest/
+https://gitlab.com/patkennedy79/flask_user_management_example/-/blob/main/tests/unit/test_models.py
+https://www.tutorialspoint.com/html5/html5_canvas.htm
+https://www.simplilearn.com/tutorials/html-tutorial/html-canvas
+https://codepen.io/ecurbelo/pen/kyKLoM
+https://github.com/mattkohl/docker-flask-celery-redis
+https://getbootstrap.com/docs/5.2/components/navbar/
+https://github.com/testdrivenio/flask-on-docker
+https://python.plainenglish.io/scheduling-jobs-2-using-celery-7464ca0aed6d
+
+
+https://karthi-net.medium.com/top-6-gui-tools-for-managing-docker-environments-ee2d69ba5a4f

@@ -23,7 +23,7 @@ services:
       CELERY_RESULT_BACKEND: redis://redis
     depends_on:
       - redis
-    volumes: ['./celery-workers:/queue']
+    volumes: ['./celery_workers:/queue']
   monitor:
     build:
       context: celery_workers
@@ -37,8 +37,20 @@ services:
     depends_on:
       - redis
       - worker
-    volumes: ['./celery-workers:/queue']
+    volumes: ['./celery_workers:/queue']
   redis:
     image: redis:alpine
     ports:
       - "6379:6379"
+
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=homehub
+      - POSTGRES_PASSWORD=homehubpass
+      - POSTGRES_DB=homehub
+
+volumes:
+  postgres_data:
